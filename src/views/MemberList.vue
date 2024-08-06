@@ -7,7 +7,10 @@
                         회원목록
                     </v-card-title>
                     <v-card-text>
-                        <v-data-table :headers="tableHeaders" :items="memberList">
+                        <v-data-table 
+                        :headers="tableHeaders" 
+                        :items="memberList"
+                        >
 
                         </v-data-table>
                     </v-card-text>
@@ -24,17 +27,24 @@ export default {
         return {
             tableHeaders: [{ title: 'ID', key: 'id', align: 'start' },
             { title: '이름', key: 'name', align: 'start' },
-            { title: '이메일', key: 'email', align: 'start' }],
+            { title: '이메일', key: 'email', align: 'start' },
+            { title: "주문수량", key: "orderCount", align: "start" },
+            ],
+
             memberList: []
         }
     },
-    async created(){
-        const token = localStorage.getItem('token');
-        const headers = {"Authorization" : `Bearer ${token}`};
-        // {"headers":{"Authorization":"Bearer 토큰값"}}
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/list`,{headers})
-        console.log(response)
-        this.memberList = response.data.result.content;
+    async created() {
+        // const token = localStorage.getItem('token');
+        // const headers = {"Authorization" : `Bearer ${token}`};
+        // // {"headers":{"Authorization":"Bearer 토큰값"}}
+        // const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/list`,{headers})
+        try {
+            const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/list`);
+            this.memberList = response.data.result.content;
+        } catch (e) {
+            console.log(e);
+        }
     },
 };
 </script>

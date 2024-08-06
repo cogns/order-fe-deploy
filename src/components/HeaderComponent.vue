@@ -5,7 +5,7 @@
                 <v-col class="d-flex justify-start">
                     <div v-if="userRole === 'ADMIN'">
                         <v-btn :to="{ path: '/member/list' }">회원관리</v-btn>
-                        <v-btn :to="{ path: '/product/mamage' }">상품관리</v-btn>
+                        <v-btn :to="{ path: '/product/manage' }">상품관리</v-btn>
                         <v-btn :to="{ path: '/order/list' }">실시간주문</v-btn>
                     </div>
                 </v-col>
