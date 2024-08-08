@@ -7,6 +7,7 @@ import router from '@/router/index.js'
 import vuetify from './plugins/vuetify';
 import '@mdi/font/css/materialdesignicons.css'
 import axios from 'axios';
+import store from './store';
 
 // createApp(App).mount('#app')
 const app = createApp(App);
@@ -44,10 +45,12 @@ axios.interceptors.response.use(
                 window.location.href = '/login';
             }
         }
+        return Promise.reject(error)
     }
 )
 
 
+app.use(store);
 app.use(router);
 app.use(vuetify);
 app.mount("#app");

@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { practiceRouter } from './practiceRouter'; //practiceRouter안에 import한 것을 모두 가져옴
 import { memberRouter } from './memberRouter';
 import { productRouter } from './productRouter';
+import { orderRouter } from './orderRouter';
 const routes = [
     // {
     //     // path로도 라우팅이 가능하고, name으로도 라우팅이 가능
@@ -25,7 +26,8 @@ const routes = [
    
     ...practiceRouter, //practiceRouter의 path, name, component을 모두 가져옴
     ...memberRouter,
-    ...productRouter
+    ...productRouter,
+    ...orderRouter
 
 ]
 
