@@ -11,7 +11,7 @@
                 </v-col>
 
                 <v-col class="text-center">
-                    <v-btn :to="{ path: '/' }">java shop#######################</v-btn>
+                    <v-btn :to="{ path: '/' }">java shop99999999999999999999</v-btn>
                 </v-col>
 
                 <v-col class="d-flex justify-end">
