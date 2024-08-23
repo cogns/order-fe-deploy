@@ -6,7 +6,7 @@
                     <div v-if="userRole === 'ADMIN'">
                         <v-btn :to="{ path: '/member/list' }">회원관리</v-btn>
                         <v-btn :to="{ path: '/product/manage' }">상품관리</v-btn>
-                        <v-btn :to="{ path: '/order/list' }">실시간주문</v-btn>
+                        <v-btn :to="{ path: '/order/list' }">실시간주문{{ liveQuantity }}</v-btn>
                     </div>
                 </v-col>
 
@@ -35,29 +35,32 @@ export default {
     data() {
         return {
             userRole: null,
-            isLogin: false
+            isLogin: false,
+            liveQuantity:0,
         }
     },
-    computed:{
+    computed: {
         ...mapGetters(['getTotalQuantity']),
     },
     created() {
         const token = localStorage.getItem("token");
-        if(token){
+        if (token) {
             this.isLogin = true;
             this.userRole = localStorage.getItem("role");
         }
-        if(this.userRole === 'ADMIN'){
-            let sse = new EventSourcePolyfill(`${process.env.VUE_APP_API_BASE_URL}/subscribe`, 
-                {headers: {Authorization: `Bearer ${token}`}});
-            sse.addEventListener('connect', (event)=> { console.log(event) });
+        if (this.userRole === 'ADMIN') {
+            let sse = new EventSourcePolyfill(`${process.env.VUE_APP_API_BASE_URL}/subscribe`,
+                { headers: { Authorization: `Bearer ${token}` } });
+            sse.addEventListener('connect', (event) => { console.log(event) })
+            sse.addEventListener('ordered', (event) => { console.log(event.data); this.liveQuantity++; })
+            sse.onerror = (error) => { console.log(error); sse.close(); }
         }
     },
 
     methods: {
-        doLogout(){
+        doLogout() {
             localStorage.clear();
-            window.location.href='/';
+            window.location.href = '/';
         }
     }
 }
