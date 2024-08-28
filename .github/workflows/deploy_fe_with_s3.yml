@@ -43,4 +43,4 @@ jobs:
         run: aws s3 cp ./dist s3://www.cogns.store/ --recursive
 
       - name: invalidate cloudfront cache
-        run: aws cloudfront create-invalidation --distribution-id E8O4RY8CPQADQ --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E2NPOKO1NSHJ8F --paths "/*"
